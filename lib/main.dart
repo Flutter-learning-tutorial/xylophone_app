@@ -21,11 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void playSound(int sound) {
-    AudioCache player = AudioCache();
-    player.play('note$sound.wav');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,86 +32,35 @@ class _HomePageState extends State<HomePage> {
         color: Colors.grey[400],
         child: Column(
           children: [
-            TextButton(
-              onPressed: () {
-                playSound(1);
-              },
-              child: Container(
-                color: Colors.white,
-                margin: EdgeInsets.only(left: 20, top: 20, right: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(2);
-              },
-              child: Container(
-                color: Colors.grey[800],
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(3);
-              },
-              child: Container(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(4);
-              },
-              child: Container(
-                color: Colors.grey[800],
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(5);
-              },
-              child: Container(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(6);
-              },
-              child: Container(
-                color: Colors.grey[800],
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                playSound(7);
-              },
-              child: Container(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 90,
-              ),
-            ),
+            getButton(color: Colors.orange, sound: 1),
+            getButton(color: Colors.white, sound: 2),
+            getButton(color: Colors.blue, sound: 3),
+            getButton(color: Colors.red, sound: 4),
+            getButton(color: Colors.yellow, sound: 5),
+            getButton(color: Colors.green, sound: 6),
+            getButton(color: Colors.purple, sound: 7),
           ],
         ),
       ),
     );
+  }
+
+  Expanded getButton({color: Color, sound: int}) {
+    return Expanded(
+      child: TextButton(
+        style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+        onPressed: () {
+          playSound(sound);
+        },
+        child: Container(
+          color: color,
+        ),
+      ),
+    );
+  }
+
+  void playSound(int sound) {
+    AudioCache player = AudioCache();
+    player.play('note$sound.wav');
   }
 }
